@@ -9,6 +9,8 @@ int main()
     int max = INT_MIN;
     int min = INT_MAX;
     int g50 = 0;
+    printf("--- Array Data Alaysis ---\n");
+    printf("Array Elements: ");
 
     for (int i = 0; i < arrLen; i++)
     {
@@ -29,17 +31,12 @@ int main()
     }
     float avg = (float)sum / arrLen;
 
-    printf("--- Array Data Alaysis ---\n");
-    printf("Array Elements: ");
-    for (int i = 0; i < arrLen; i++)
-    {
-        printf("%d ", data[i]);
-    }
-    printf("Sum of Elements: %d\n", sum);
+    printf("\nSum of Elements: %d\n", sum);
     printf("Average of Elements: %.2f\n", avg);
     printf("Maximum Value: %d\n", max);
-    printf("Minimux Value: %d\n", min);
-    printf("Elements Greater Than 50: %d", g50);
+    printf("Minimum Value: %d\n", min);
+    printf("Elements Greater Than 50: %d\n", g50);
+    printf("fasfasdfds");
 
     return 0;
 }
