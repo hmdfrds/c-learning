@@ -61,7 +61,7 @@ int main()
             printf("%c", reverse[i]);
         }
         printf("Reverse: %s\n", reverse);
-        printf("Reverse Length: %d\n", (int)strlen(reverse));
+        printf("Reverse Length: %zu\n", strlen(reverse));
     }
 
     return 0;
