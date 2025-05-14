@@ -1,15 +1,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#define DIARY_FILE "diary.txt"
-#define MAX_LINE_LENGTH 100
+#define diaryFilename "diary.txt"
 
 int main()
 {
-    char input[MAX_LINE_LENGTH];
+    char input[100];
     printf("Input you diary Entry:\n");
 
-    if (fgets(input, MAX_LINE_LENGTH, stdin) != NULL)
+    if (fgets(input, sizeof(input), stdin) != NULL)
     {
         int len = strlen(input);
 
@@ -26,45 +25,44 @@ int main()
 
     time_t now = time(NULL);
     struct tm *local_time_info = localtime(&now);
-    char timestamp_str[MAX_LINE_LENGTH];
+    char timestamp_str[100];
     strftime(timestamp_str, sizeof(timestamp_str), "%Y-%m-%d %H:%M:%S",
              local_time_info);
 
-    FILE *openFile = fopen(DIARY_FILE, "a");
+    FILE *openFile = fopen(diaryFilename, "a");
 
-    printf("Opening file\n");
     if (openFile == NULL)
     {
-        printf("Error opening file %s for appending\n", DIARY_FILE);
+        printf("Error opening file %s for appending\n", diaryFilename);
         return 1;
     }
 
     if (!fputs(timestamp_str, openFile))
     {
-        printf("Error writing into file %s\n", DIARY_FILE);
+        printf("Error writing into file %s\n", diaryFilename);
         return 1;
     }
 
     if (!fprintf(openFile, ": %s\n", input))
     {
-        printf("Error writing into file %s\n", DIARY_FILE);
+        printf("Error writing into file %s\n", diaryFilename);
         return 1;
     }
 
     fclose(openFile);
-    printf("Entry was added into %s\n", DIARY_FILE);
+    printf("Entry was added into %s\n", diaryFilename);
 
     printf("\n--- Displaying Diary Entries ---\n");
 
-    FILE *readFile = fopen(DIARY_FILE, "r");
+    FILE *readFile = fopen(diaryFilename, "r");
 
     if (readFile == NULL)
     {
-        printf("Error reading file %s\n", DIARY_FILE);
+        printf("Error reading file %s\n", diaryFilename);
         return 1;
     }
 
-    char line[MAX_LINE_LENGTH];
+    char line[100];
     while (fgets(line, sizeof(line), readFile))
     {
         printf("%s", line);
