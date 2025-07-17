@@ -1,37 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+struct Employee {
+  char name[20];
+  int age;
+  double salary;
+};
+
 int main() {
-  int arr[3] = {10, 20, 30};
-  int *p = arr;
-
-  printf("First: %d\n", *p);
-  p++;
-  printf("Second: %d\n", *p);
-  p++;
-  printf("Third: %d\n", *p);
-
-  int size;
-  printf("Enter size: ");
-  scanf("%d", &size);
-
-  char *dyn = (char *)malloc(size * sizeof(char));
-  if (dyn == NULL) {
+  int size = 2;
+  struct Employee *employees =
+      (struct Employee *)malloc(2 * sizeof(struct Employee));
+  if (employees == NULL) {
     printf("Alloc fail\n");
     return 1;
   }
 
+  struct Employee *ptr = employees;
   for (int i = 0; i < size; i++) {
-    printf("Enter char: ");
-    scanf(" %c", dyn++);
+    printf("Name: ");
+    scanf(" %19s", ptr->name);
+    printf("Age: ");
+    scanf(" %d", &ptr->age);
+    printf("Salary: ");
+    scanf("%lf", &ptr->salary);
+    ptr++;
   }
-  int counter = size;
-  while (counter > 0) {
-    printf("%c", *--dyn);
-    counter--;
-  }
-  printf("\n");
-  free(dyn);
 
+  ptr = employees;
+  for (int i = 0; i < size; i++) {
+    printf("Employee(%s,%d,%2f)\n", ptr->name, ptr->age, ptr->salary);
+    ptr++;
+  }
+  free(employees);
   return 0;
 }
